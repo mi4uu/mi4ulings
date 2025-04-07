@@ -1,0 +1,53 @@
+{
+    
+    "workbench.colorTheme": "Hogwarts colors dark",
+    "cargoRunner.nextest.enable": true,
+    "codeglow.blockDetection": "delimiters",
+    "codeglow.dimOpacity": 0.8,
+    "editor.fontFamily": "VictorMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.fontFamily": "Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    // "peacock.color": "#9A28F83C",
+    "peacock.color": "#D9F7853C",
+
+    "peacock.lightForegroundColor": "#FFFFFF",
+    "peacock.darkForegroundColor": "#000000",
+    "peacock.affectPanelBorder": true,
+    "peacock.affectActivityBar": true,
+    "peacock.affectSashHover": false,
+    "peacock.keepBadgeColor": true,
+    "peacock.elementAdjustments": {
+        "activityBar": "lighten",
+        "statusBar": "none",
+        "titleBar": "none",    },
+    // "peacock.squigglyBeGone": true,
+    // "peacock.affectEditorGroupBorder": false,
+   
+    "workbench.iconTheme": "eyecons",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#e8fab53c",
+        "activityBar.background": "#e8fab53c",
+        "activityBar.foreground": "#000000",
+        "activityBar.inactiveForeground": "#00000099",
+        "commandCenter.border": "#00000099",
+        "sideBar.border": "#e8fab53c",
+        "statusBar.background": "#d9f7853c",
+        "statusBar.border": "#d9f7853c",
+        "statusBar.foreground": "#000000",
+        "statusBarItem.hoverBackground": "#caf4553c",
+        "statusBarItem.remoteBackground": "#d9f7853c",
+        "statusBarItem.remoteForeground": "#000000",
+        "tab.activeBorder": "#e8fab53c",
+        "titleBar.activeBackground": "#d9f7853c",
+        "titleBar.activeForeground": "#000000",
+        "titleBar.border": "#d9f7853c",
+        "titleBar.inactiveBackground": "#d9f78599",
+        "titleBar.inactiveForeground": "#00000099",
+        "panel.border": "#e8fab53c"
+    }
+
+
+
+}
