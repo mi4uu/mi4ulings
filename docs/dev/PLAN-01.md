@@ -5,7 +5,7 @@ MI4ULINGS
 workspace for small projects around ai, agentic tools, documentation, etc.
 workspace will keep dependences and optional dependences for packages crates inside
 all program will use package crates/config to serialize/deserialize/save&load configs, that will be stored in .config directory of workspace, each crate in this workspace will have own .toml file that will have stored all of needed configs. 
-
+all crates uses anyhow with tracing to handle result .
 
 ## PROGRAMING LANGUAGE
 rust
@@ -16,6 +16,7 @@ rust
 - serde_json
 - toml
 - anyhow
+- reqwest
 
 
 ### STACK - tui
