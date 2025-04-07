@@ -1,6 +1,6 @@
 {
     
-    "workbench.colorTheme": "Hogwarts colors dark",
+    "workbench.colorTheme": "Default Dark Modern",
     "cargoRunner.nextest.enable": true,
     "codeglow.blockDetection": "delimiters",
     "codeglow.dimOpacity": 0.8,
@@ -10,7 +10,7 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     // "peacock.color": "#9A28F83C",
-    "peacock.color": "#D9F7853C",
+    "peacock.color": "#ebdd1d",
 
     "peacock.lightForegroundColor": "#FFFFFF",
     "peacock.darkForegroundColor": "#000000",
@@ -25,27 +25,27 @@
     // "peacock.squigglyBeGone": true,
     // "peacock.affectEditorGroupBorder": false,
    
-    "workbench.iconTheme": "eyecons",
+    "workbench.iconTheme": "vs-seti",
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#e8fab53c",
-        "activityBar.background": "#e8fab53c",
+        "activityBar.activeBackground": "#efe44c",
+        "activityBar.background": "#efe44c",
         "activityBar.foreground": "#000000",
         "activityBar.inactiveForeground": "#00000099",
         "commandCenter.border": "#00000099",
-        "sideBar.border": "#e8fab53c",
-        "statusBar.background": "#d9f7853c",
-        "statusBar.border": "#d9f7853c",
+        "sideBar.border": "#efe44c",
+        "statusBar.background": "#ebdd1d",
+        "statusBar.border": "#ebdd1d",
         "statusBar.foreground": "#000000",
-        "statusBarItem.hoverBackground": "#caf4553c",
-        "statusBarItem.remoteBackground": "#d9f7853c",
+        "statusBarItem.hoverBackground": "#c4b811",
+        "statusBarItem.remoteBackground": "#ebdd1d",
         "statusBarItem.remoteForeground": "#000000",
-        "tab.activeBorder": "#e8fab53c",
-        "titleBar.activeBackground": "#d9f7853c",
+        "tab.activeBorder": "#efe44c",
+        "titleBar.activeBackground": "#ebdd1d",
         "titleBar.activeForeground": "#000000",
-        "titleBar.border": "#d9f7853c",
-        "titleBar.inactiveBackground": "#d9f78599",
+        "titleBar.border": "#ebdd1d",
+        "titleBar.inactiveBackground": "#ebdd1d99",
         "titleBar.inactiveForeground": "#00000099",
-        "panel.border": "#e8fab53c"
+        "panel.border": "#efe44c"
     }
 
 

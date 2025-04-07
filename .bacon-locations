@@ -1,0 +1,84 @@
+warning|:|crates/config/src/lib.rs|:|3|:|3|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/config/src/lib.rs:3:17[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+|:|none
+help|:|crates/config/src/lib.rs|:|3|:|3|:|17|:|23|:|remove the unused import|:|none|:|
+help|:|crates/config/src/lib.rs|:|3|:|3|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/config/src/lib.rs|:|3|:|3|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/config/src/lib.rs|:|3|:|3|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/config/src/lib.rs:3:17[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m3[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m  [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
+
+|:|none
+help|:|crates/config/src/lib.rs|:|3|:|3|:|17|:|23|:|remove the unused import|:|none|:|
+help|:|crates/config/src/lib.rs|:|3|:|3|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/config/src/lib.rs|:|3|:|3|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/config/src/lib.rs|:|27|:|32|:|5|:|6|:|you should consider adding a `Default` implementation for `Config<T>`|:|[0m[1m[33mwarning[0m[0m[1m: you should consider adding a `Default` implementation for `Config<T>`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/config/src/lib.rs:27:5[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0m    pub fn new() -> Self {[0m
+[0m[1m[38;5;12m28[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        Self {[0m
+[0m[1m[38;5;12m29[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            data: T::default(),[0m
+[0m[1m[38;5;12m30[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            cleanup_backups_after_days: 30, // Default value[0m
+[0m[1m[38;5;12m31[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        }[0m
+[0m[1m[38;5;12m32[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_____^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(clippy::new_without_default)]` on by default[0m
+[0m[1m[38;5;14mhelp[0m[0m: try adding this[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m25[0m[0m [0m[0m[38;5;10m+ impl<T: Configuration> Default for Config<T> {[0m
+[0m[1m[38;5;12m26[0m[0m [0m[0m[38;5;10m+     fn default() -> Self {[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[38;5;10m+         Self::new()[0m
+[0m[1m[38;5;12m28[0m[0m [0m[0m[38;5;10m+     }[0m
+[0m[1m[38;5;12m29[0m[0m [0m[0m[38;5;10m+ }[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+|:|none
+help|:|crates/config/src/lib.rs|:|25|:|25|:|1|:|1|:|try adding this|:|none|:|impl<T: Configuration> Default for Config<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+
+warning|:|crates/config/src/lib.rs|:|27|:|32|:|5|:|6|:|you should consider adding a `Default` implementation for `Config<T>`|:|[0m[1m[33mwarning[0m[0m[1m: you should consider adding a `Default` implementation for `Config<T>`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/config/src/lib.rs:27:5[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0m    pub fn new() -> Self {[0m
+[0m[1m[38;5;12m28[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        Self {[0m
+[0m[1m[38;5;12m29[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            data: T::default(),[0m
+[0m[1m[38;5;12m30[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            cleanup_backups_after_days: 30, // Default value[0m
+[0m[1m[38;5;12m31[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        }[0m
+[0m[1m[38;5;12m32[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_____^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#new_without_default[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(clippy::new_without_default)]` on by default[0m
+[0m[1m[38;5;14mhelp[0m[0m: try adding this[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m25[0m[0m [0m[0m[38;5;10m+ impl<T: Configuration> Default for Config<T> {[0m
+[0m[1m[38;5;12m26[0m[0m [0m[0m[38;5;10m+     fn default() -> Self {[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[38;5;10m+         Self::new()[0m
+[0m[1m[38;5;12m28[0m[0m [0m[0m[38;5;10m+     }[0m
+[0m[1m[38;5;12m29[0m[0m [0m[0m[38;5;10m+ }[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+
+|:|none
+help|:|crates/config/src/lib.rs|:|25|:|25|:|1|:|1|:|try adding this|:|none|:|impl<T: Configuration> Default for Config<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+
