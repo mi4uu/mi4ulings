@@ -1,0 +1,16 @@
+inputs_path = "inputs"
+outputs_path = "outputs"
+logs_path = "logs"
+output_parts_html_suffix = "parts_html"
+output_parts_media_suffix = "parts_media"
+output_parts_markdown_suffix = "parts_md"
+output_parts_markdown_results_suffix = "results_md"
+retry_count = 3
+delay_between_request_in_ms = 500
+max_concurrent_requests = 1
+user_agent = "mi4uling-docling-bot"
+respect_robots_txt = true
+transform_md_using = "htmd"
+retry_delay = [10, 40, 200]
+refetch_after_days = 100
+default_deep = 1

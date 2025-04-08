@@ -57,9 +57,24 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 
 
 # PLAN
-[] plan step by step program execution with details
-[] extending this plan with details, and fix mistakes
-[] create config implementation
-[] create unit tests for planed program
-[] implement program
-[] test program
+
+## v0.1
+
+[x] plan step by step program execution with details
+[x] extending this plan with details, and fix mistakes
+[x] create config implementation
+[-] create unit tests for planed program (basic tests implemented, comprehensive tests pending)
+[x] implement program
+[-] test program (manual testing required)
+
+## v0.2
+
+[] BUG: .md files are non converted html files, they should be converted
+[] BUG: .md files should be stripped from any css, js, html tags, images..etc and should benerated only from body of the document, title should be used before this content as header
+[x] BUG: features in cargo.toml was badly writen end it was resulting in error without fast_hrml2md - fixed
+[] implement comprehensive unit tests
+[] implement integration tests
+[] implement e2e tests
+[] BUG: list parameter does not show deep parameter nor retry/try count
+[] FEATURE: success converted result should be copied to root folder of workspace to dir docs/docling_output
+[] FEATURE: add docstring to document code to existing codebase
