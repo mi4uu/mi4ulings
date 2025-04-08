@@ -9,3 +9,8 @@ init:
     cargo binstall cargo-chef
     cargo binstall cargo-audit --locked
     cargo binstall cargo-shear
+    cargo binstall cargo-readme
+
+
+gen-readme:
+    cargo readme > README.md
