@@ -58,7 +58,7 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 
 # PLAN
 
-## v0.1
+## v.0.1
 
 [x] plan step by step program execution with details
 [x] extending this plan with details, and fix mistakes
@@ -69,12 +69,18 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 
 ## v0.2
 
-[] BUG: .md files are non converted html files, they should be converted
-[] BUG: .md files should be stripped from any css, js, html tags, images..etc and should benerated only from body of the document, title should be used before this content as header
+[x] BUG: .md files are non converted html files, they should be converted
+[x] BUG: .md files should be stripped from any css, js, html tags, images..etc and should benerated only from body of the document, title should be used before this content as header
 [x] BUG: features in cargo.toml was badly writen end it was resulting in error without fast_hrml2md - fixed
 [] implement comprehensive unit tests
 [] implement integration tests
 [] implement e2e tests
-[] BUG: list parameter does not show deep parameter nor retry/try count
-[] FEATURE: success converted result should be copied to root folder of workspace to dir docs/docling_output
-[] FEATURE: add docstring to document code to existing codebase
+[x] BUG: list parameter does not show deep parameter nor retry/try count
+[x] FEATURE: success converted result should be copied to root folder of workspace to dir docs/docling_output
+[x] FEATURE: add docstring to document code to existing codebase
+
+## v0.3
+
+[x] BUG: creating entry without deep parameter always sets deep=1 instead of default_deep
+[x] BUG: hanging issue during downloading - fixed using tokio broadcast/spawn for concurrent processing
+[x] BUG: media files filtering incorrectly - now only image files are downloaded (verified by Content-Type header)

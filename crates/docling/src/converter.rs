@@ -5,6 +5,7 @@ use std::fs::{self, create_dir_all, read_to_string, write};
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
+use regex::Regex;
 use reqwest::Client;
 use tracing::{debug, error, info, warn};
 
@@ -97,11 +98,20 @@ impl Converter {
     
     /// Convert HTML to Markdown using htmd
     fn convert_with_htmd(&self, html: &str) -> Result<String> {
-        // Simplified implementation to avoid dependency on specific function names
         #[cfg(feature = "htmd")]
         {
-            // Just return the HTML as-is for now to get things compiling
-            Ok(format!("# Converted with htmd\n\n{}", html))
+            // Using a simplified conversion approach for now
+            // In a real implementation, we would use the htmd library properly
+            debug!("Converting HTML to Markdown with htmd feature");
+            let mut md = self.simple_html_to_markdown(html);
+            
+            // Try to extract title for use as header
+            let title = self.extract_title_from_html(html);
+            if let Some(title) = title {
+                md = format!("# {}\n\n{}", title, md);
+            }
+            
+            Ok(md)
         }
         
         #[cfg(not(feature = "htmd"))]
@@ -114,14 +124,174 @@ impl Converter {
     fn convert_with_fast_html2md(&self, html: &str) -> Result<String> {
         #[cfg(feature = "fast-html2md")]
         {
-            // Just return the HTML as-is for now to get things compiling
-            Ok(format!("# Converted with fast_html2md\n\n{}", html))
+            // Using a simplified conversion approach for now
+            // In a real implementation, we would use the fast_html2md library properly
+            debug!("Converting HTML to Markdown with fast-html2md feature");
+            let mut md = self.simple_html_to_markdown(html);
+            
+            // Try to extract title for use as header
+            let title = self.extract_title_from_html(html);
+            if let Some(title) = title {
+                md = format!("# {}\n\n{}", title, md);
+            }
+            
+            Ok(md)
         }
         
         #[cfg(not(feature = "fast-html2md"))]
         {
             Err(anyhow::anyhow!("fast-html2md feature is not enabled"))
         }
+    }
+    
+    /// A simple HTML to Markdown converter implementation
+    /// This is a fallback method that implements basic conversions
+    fn simple_html_to_markdown(&self, html: &str) -> String {
+        let mut output = String::new();
+        let mut in_body = false;
+        
+        // Extract content from body tag
+        if let Some(body_start) = html.to_lowercase().find("<body") {
+            if let Some(body_content_start) = html[body_start..].find('>') {
+                let real_body_start = body_start + body_content_start + 1;
+                
+                if let Some(body_end) = html[real_body_start..].to_lowercase().find("</body>") {
+                    let body_content = &html[real_body_start..real_body_start + body_end];
+                    
+                    // Process body content
+                    let mut result = body_content.to_string();
+                    
+                    // Basic replacements for common HTML elements
+                    // Headers
+                    result = result.replace("<h1>", "# ").replace("</h1>", "\n\n");
+                    result = result.replace("<h2>", "## ").replace("</h2>", "\n\n");
+                    result = result.replace("<h3>", "### ").replace("</h3>", "\n\n");
+                    result = result.replace("<h4>", "#### ").replace("</h4>", "\n\n");
+                    result = result.replace("<h5>", "##### ").replace("</h5>", "\n\n");
+                    result = result.replace("<h6>", "###### ").replace("</h6>", "\n\n");
+                    
+                    // Paragraphs
+                    result = result.replace("<p>", "").replace("</p>", "\n\n");
+                    
+                    // Lists
+                    result = result.replace("<ul>", "").replace("</ul>", "\n");
+                    result = result.replace("<ol>", "").replace("</ol>", "\n");
+                    result = result.replace("<li>", "* ").replace("</li>", "\n");
+                    
+                    // Links - simplified approach, not handling attributes properly
+                    while let Some(link_start) = result.find("<a ") {
+                        if let Some(href_start) = result[link_start..].find("href=\"") {
+                            let href_content_start = link_start + href_start + 6;
+                            if let Some(href_end) = result[href_content_start..].find('"') {
+                                let url = &result[href_content_start..href_content_start + href_end];
+                                
+                                if let Some(tag_end) = result[link_start..].find('>') {
+                                    let tag_close = link_start + tag_end + 1;
+                                    
+                                    if let Some(closing_tag) = result[tag_close..].find("</a>") {
+                                        let text = &result[tag_close..tag_close + closing_tag];
+                                        let link = format!("<a href=\"{}\">{}</a>", url, text);
+                                        let md_link = format!("[{}]({})", text, url);
+                                        
+                                        result = result.replacen(&link, &md_link, 1);
+                                    } else {
+                                        // No closing tag found, just remove the opening tag
+                                        let tag = &result[link_start..tag_close];
+                                        result = result.replacen(tag, "", 1);
+                                    }
+                                } else {
+                                    // Malformed anchor tag, just remove it
+                                    let partial_tag = &result[link_start..];
+                                    result = result[..link_start].to_string();
+                                    break;
+                                }
+                            } else {
+                                // Couldn't find end of href attribute, just remove the tag
+                                let tag = &result[link_start..link_start + href_start + 6];
+                                result = result.replacen(tag, "", 1);
+                            }
+                        } else {
+                            // No href found, just remove the tag
+                            let tag = &result[link_start..link_start + 3];
+                            result = result.replacen(tag, "", 1);
+                        }
+                    }
+                    
+                    // Remove remaining HTML tags (simplified approach)
+                    while let Some(tag_start) = result.find('<') {
+                        if let Some(tag_end) = result[tag_start..].find('>') {
+                            let tag = &result[tag_start..tag_start + tag_end + 1];
+                            result = result.replacen(tag, "", 1);
+                        } else {
+                            break;
+                        }
+                    }
+                    
+                    // Handle entity references
+                    result = result.replace("&lt;", "<").replace("&gt;", ">")
+                              .replace("&amp;", "&").replace("&quot;", "\"")
+                              .replace("&nbsp;", " ");
+                    
+                    // Remove multiple consecutive whitespace
+                    let whitespace_regex = regex::Regex::new(r"\s{2,}").unwrap();
+                    result = whitespace_regex.replace_all(&result, " ").to_string();
+                    
+                    // Fix newlines
+                    result = result.replace('\r', "");
+                    let multiple_newlines = regex::Regex::new(r"\n{3,}").unwrap();
+                    result = multiple_newlines.replace_all(&result, "\n\n").to_string();
+                    
+                    return result;
+                }
+            }
+        }
+        
+        // Fallback if we couldn't extract body content
+        let mut result = html.to_string();
+        
+        // Remove all script and style tags and their contents
+        while let Some(script_start) = result.to_lowercase().find("<script") {
+            if let Some(script_end) = result[script_start..].to_lowercase().find("</script>") {
+                result = result[..script_start].to_string() + &result[script_start + script_end + 9..];
+            } else {
+                break;
+            }
+        }
+        
+        while let Some(style_start) = result.to_lowercase().find("<style") {
+            if let Some(style_end) = result[style_start..].to_lowercase().find("</style>") {
+                result = result[..style_start].to_string() + &result[style_start + style_end + 8..];
+            } else {
+                break;
+            }
+        }
+        
+        // Basic replacements (simplified)
+        result = result.replace("<h1>", "# ").replace("</h1>", "\n\n");
+        result = result.replace("<p>", "").replace("</p>", "\n\n");
+        result = result.replace("<br>", "\n").replace("<br/>", "\n").replace("<br />", "\n");
+        
+        // Remove remaining HTML tags (simplified)
+        let tag_regex = regex::Regex::new(r"<[^>]+>").unwrap();
+        result = tag_regex.replace_all(&result, "").to_string();
+        
+        // Clean up whitespace
+        let whitespace_regex = regex::Regex::new(r"\s{2,}").unwrap();
+        result = whitespace_regex.replace_all(&result, " ").to_string();
+        
+        result
+    }
+    
+    /// Extract title from HTML content
+    fn extract_title_from_html(&self, html: &str) -> Option<String> {
+        // Simple regex to extract content between <title> tags
+        if let Some(title_start) = html.to_lowercase().find("<title>") {
+            if let Some(title_end) = html.to_lowercase()[title_start..].find("</title>") {
+                let title_content = &html[title_start + 7..title_start + title_end];
+                return Some(title_content.trim().to_string());
+            }
+        }
+        None
     }
     
     /// Convert HTML to Markdown using Jina Reader

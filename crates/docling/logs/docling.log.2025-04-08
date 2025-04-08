@@ -1,0 +1,8 @@
+2025-04-08T01:32:28.317298Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:144: Logging system initialized at level: DEBUG
+2025-04-08T01:32:28.317337Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:145: Log file: logs/docling_20250408_033228.log
+2025-04-08T01:32:34.441227Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:144: Logging system initialized at level: DEBUG
+2025-04-08T01:32:34.441263Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:145: Log file: logs/docling_20250408_033234.log
+2025-04-08T01:32:37.374479Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:144: Logging system initialized at level: DEBUG
+2025-04-08T01:32:37.374523Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:145: Log file: logs/docling_20250408_033237.log
+2025-04-08T01:32:42.244473Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:144: Logging system initialized at level: DEBUG
+2025-04-08T01:32:42.244533Z  INFO main ThreadId(01) docling: crates/docling/src/main.rs:145: Log file: logs/docling_20250408_033242.log

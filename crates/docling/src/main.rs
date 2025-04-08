@@ -177,12 +177,17 @@ async fn main() -> Result<()> {
         
         Commands::List => {
             let entries = mi4ulings_docling::list_urls()?;
+            
+            // Load config to get retry count
+            let config = Config::<DoclingConfig>::load_or_default()?;
+            let retry_count = config.data.retry_count;
+            
             if entries.is_empty() {
                 println!("No entries found");
             } else {
                 println!("URL entries:");
-                println!("{:<20} {:<40} {:<10} {:<15}", "NAME", "URL", "STATUS", "LAST DOWNLOAD");
-                println!("{}", "-".repeat(85));
+                println!("{:<20} {:<30} {:<8} {:<5} {:<10} {:<10} {:<10}", "NAME", "URL", "STATUS", "DEPTH", "TRIES", "RETRIES", "LAST DOWNLOAD");
+                println!("{}", "-".repeat(110));
                 
                 for entry in entries {
                     let status = match entry.status {
@@ -195,11 +200,35 @@ async fn main() -> Result<()> {
                         .map(|dt| dt.to_string())
                         .unwrap_or_else(|| "Never".to_string());
                     
-                    println!("{:<20} {:<40} {:<10} {:<15}",
+                    // Calculate try count based on last_try and last_fail
+                    let try_count = if entry.last_try.is_some() {
+                        if entry.last_fail.is_some() {
+                            // If both are set, count them as separate tries
+                            "Multiple"
+                        } else {
+                            // If only last_try is set, it's at least one try
+                            "1+"
+                        }
+                    } else {
+                        "0"
+                    };
+                    
+                    println!("{:<20} {:<30} {:<8} {:<5} {:<10} {:<10} {:<10}",
                              entry.name,
-                             entry.url,
+                             if entry.url.len() > 30 { 
+                                 format!("{}...", &entry.url[..27]) 
+                             } else { 
+                                 entry.url.clone() 
+                             },
                              status,
-                             last_download);
+                             entry.crawl_depth,
+                             try_count,
+                             retry_count,
+                             if last_download.len() > 10 { 
+                                 format!("{}...", &last_download[..7]) 
+                             } else { 
+                                 last_download
+                             });
                 }
             }
         }

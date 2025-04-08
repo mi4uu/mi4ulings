@@ -13,4 +13,4 @@ respect_robots_txt = true
 transform_md_using = "htmd"
 retry_delay = [10, 40, 200]
 refetch_after_days = 100
-default_deep = 1
+default_deep = 2

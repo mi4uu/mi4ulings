@@ -88,7 +88,8 @@ impl Processor {
         self.final_cleanup(&combined)
     }
     
-    /// Clean Markdown content by removing images, media, and non-domain links
+    /// Clean Markdown content by removing images, media, HTML tags, CSS, JS, and non-domain links
+    /// Ensures only the main content is preserved without formatting elements
     fn clean_content(&self, content: &str, base_domain: &str) -> String {
         let mut cleaned = String::new();
         
@@ -96,6 +97,47 @@ impl Processor {
         for line in content.lines() {
             // Skip image lines (Markdown format)
             if line.trim().starts_with("![") && line.contains("](") && line.contains(")") {
+                continue;
+            }
+            
+            // Skip lines that appear to be CSS or JavaScript
+            if line.trim().starts_with("<style") || line.trim().starts_with("<script") {
+                continue;
+            }
+            
+            // Skip lines with CSS classes or IDs
+            if line.contains("class=") || line.contains("id=") || line.contains("style=") {
+                // Preserve the content if it's within a tag by extracting text between > and <
+                let mut cleaned_line = String::new();
+                let mut in_tag = false;
+                let mut tag_content = String::new();
+                
+                for (i, c) in line.chars().enumerate() {
+                    if c == '<' {
+                        in_tag = true;
+                        if !tag_content.is_empty() {
+                            cleaned_line.push_str(&tag_content);
+                            tag_content.clear();
+                        }
+                    } else if c == '>' {
+                        in_tag = false;
+                    } else if !in_tag {
+                        tag_content.push(c);
+                    }
+                }
+                
+                // Add any remaining content
+                if !tag_content.is_empty() {
+                    cleaned_line.push_str(&tag_content);
+                }
+                
+                if !cleaned_line.trim().is_empty() {
+                    // Process links in the cleaned line
+                    let processed_line = self.process_links(&cleaned_line, base_domain);
+                    cleaned.push_str(&processed_line);
+                    cleaned.push('\n');
+                }
+                
                 continue;
             }
             

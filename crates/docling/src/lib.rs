@@ -160,7 +160,21 @@ pub struct UrlEntry {
 
 impl UrlEntry {
     /// Create a new URL entry
+    /// 
+    /// # Arguments
+    /// * `url` - The URL to crawl
+    /// * `name` - Name for this entry (used for file naming)
+    /// * `crawl_depth` - How deep to crawl (number of link levels), or None to use default_deep
+    ///
+    /// # Returns
+    /// A new UrlEntry if successful
+    ///
+    /// # Errors
+    /// Returns an error if the URL is invalid
     pub fn new(url: &str, name: &str, crawl_depth: Option<u32>) -> Result<Self> {
+        // Load config to get default_deep
+        let config = Config::<DoclingConfig>::load_or_default()?;
+        
         // Validate URL
         let parsed_url = Url::parse(url).context("Invalid URL format")?;
         
@@ -170,7 +184,7 @@ impl UrlEntry {
             last_download: None,
             last_try: None,
             last_fail: None,
-            crawl_depth: crawl_depth.unwrap_or(DEFAULT_CRAWL_DEPTH),
+            crawl_depth: crawl_depth.unwrap_or(config.data.default_deep),
             status: CrawlStatus::Enabled,
             version: 1,
         })
@@ -242,7 +256,29 @@ pub fn load_entries() -> Result<UrlEntries> {
 }
 
 /// Add a new URL entry
+///
+/// Creates a new URL entry with the specified URL, name, and crawl depth.
+/// If crawl_depth is not provided, uses the default_deep from config.
+/// If name is not provided, uses the host part of the URL.
+///
+/// # Arguments
+/// * `url` - The URL to crawl
+/// * `name_opt` - Optional name for the entry (defaults to host name)
+/// * `crawl_depth` - Optional crawl depth (defaults to config.default_deep)
+///
+/// # Returns
+/// Ok(()) if successful
+///
+/// # Errors
+/// Returns an error if:
+/// - The URL is invalid
+/// - An entry with the same name already exists
+/// - The entries cannot be saved
 pub fn add_url(url: &str, name_opt: Option<&str>, crawl_depth: Option<u32>) -> Result<()> {
+    // Load configuration to get default_deep
+    let config = Config::<DoclingConfig>::load_or_default()?;
+    let default_deep = config.data.default_deep;
+    
     // Generate name from URL if not provided
     let name = match name_opt {
         Some(n) => n.to_string(),
@@ -256,6 +292,9 @@ pub fn add_url(url: &str, name_opt: Option<&str>, crawl_depth: Option<u32>) -> R
     
     // Create new entry
     let entry = UrlEntry::new(url, &name, crawl_depth)?;
+    
+    // Store crawl_depth for logging before the entry is moved
+    let depth = entry.crawl_depth;
     
     // Load existing entries
     let mut entries = load_entries()?;
@@ -271,7 +310,7 @@ pub fn add_url(url: &str, name_opt: Option<&str>, crawl_depth: Option<u32>) -> R
     // Save entries
     save_entries(&entries)?;
     
-    info!("Added URL entry: {} ({})", name, url);
+    info!("Added URL entry: {} ({}) with depth {}", name, url, depth);
     Ok(())
 }
 
@@ -347,6 +386,7 @@ pub fn list_urls() -> Result<Vec<UrlEntry>> {
 /// 3. Converts HTML to Markdown
 /// 4. Processes and combines Markdown files
 /// 5. Creates the final output file
+/// 6. Copies the result to docs/docling_output directory
 pub async fn run_entry(name: &str) -> Result<PathBuf> {
     // Load configuration
     let config = Config::<DoclingConfig>::load_or_default()?;
@@ -372,6 +412,15 @@ pub async fn run_entry(name: &str) -> Result<PathBuf> {
     // Create error directory 
     let error_dir = base_dir.join("ERRORS");
     create_dir_all(&error_dir).context("Failed to create error directory")?;
+    
+    // Prepare the docs/docling_output directory
+    let workspace_root = std::env::current_dir()?
+        .parent() // Go up from crates/docling
+        .ok_or_else(|| anyhow::anyhow!("Failed to determine workspace root"))?
+        .to_path_buf();
+    let docling_output_dir = workspace_root.join("docs").join("docling_output");
+    create_dir_all(&docling_output_dir)
+        .context("Failed to create docs/docling_output directory")?;
     
     // Crawl and download
     let mut retry_count = 0;
@@ -406,6 +455,17 @@ pub async fn run_entry(name: &str) -> Result<PathBuf> {
                 
                 // Now save entries after the borrow is released
                 save_entries(&entries)?;
+                
+                // Copy result to docs/docling_output directory
+                let target_file = docling_output_dir.join(format!("{}.md", name));
+                std::fs::copy(&result_file, &target_file)
+                    .with_context(|| format!(
+                        "Failed to copy result file from {} to {}",
+                        result_file.display(),
+                        target_file.display()
+                    ))?;
+                
+                info!("Successfully copied result to {}", target_file.display());
                 
                 success = true;
                 return Ok(result_file);
