@@ -6,12 +6,12 @@ crates/docling
 
 # DESCRIPTION
 store in toml file list of urls to download with
-last download date and time, last try date and time, last fail date and time, how deep it should crawl, 
+last download date and time, last try date and time, last fail date and time, how deep it should crawl,
 status (enabled, disabled, failed - halted), version and NAME
 it has bin that take actions:
     - add [url]
     - stop [name]
-    - list 
+    - list
     - remove [name]
     - start [name]
 
@@ -29,7 +29,7 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 - in case of fail on any steps error should be saved into outputs_path/NAME/ERRORS/ with detailed information, time trace, and any information that might give a hint, than if there are still retry left , wait and try again.
 .
 
-- 
+-
 
 # STACK
 - spider
@@ -39,7 +39,7 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 
 
 # CONFIG
--  inputs_path 
+-  inputs_path
 -  outputs_path
 -  output_parts_html_suffix (default=parts_html)
 - output_parts_media_suffix (default=parts_media)
@@ -56,18 +56,7 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 - default deep
 
 
-# PLAN
-
-## v.0.1
-
-[x] plan step by step program execution with details
-[x] extending this plan with details, and fix mistakes
-[x] create config implementation
-[-] create unit tests for planed program (basic tests implemented, comprehensive tests pending)
-[x] implement program
-[-] test program (manual testing required)
-
-## v0.2
+## v.0.2
 
 [x] BUG: .md files are non converted html files, they should be converted
 [x] BUG: .md files should be stripped from any css, js, html tags, images..etc and should benerated only from body of the document, title should be used before this content as header
@@ -87,4 +76,4 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 
 ## v0.4
 
-[] BUG: url entries not converting but waiting indefinitely - implement verbose logging to track conversion progress
+[x] BUG: url entries not converting but waiting indefinitely - implement verbose logging to track conversion progress
