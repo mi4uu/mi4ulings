@@ -84,3 +84,7 @@ and media files if any will be saved into  outputs_path/NAME/output_parts_media_
 [x] BUG: creating entry without deep parameter always sets deep=1 instead of default_deep
 [x] BUG: hanging issue during downloading - fixed using tokio broadcast/spawn for concurrent processing
 [x] BUG: media files filtering incorrectly - now only image files are downloaded (verified by Content-Type header)
+
+## v0.4
+
+[] BUG: url entries not converting but waiting indefinitely - implement verbose logging to track conversion progress

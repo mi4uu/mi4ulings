@@ -102,38 +102,38 @@ warning|:|crates/docling/src/crawler.rs|:|23|:|23|:|5|:|29|:|unused import: `spi
 
 |:|none
 help|:|crates/docling/src/crawler.rs|:|23|:|24|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|8|:|8|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:8:5[0m
+warning|:|crates/docling/src/converter.rs|:|9|:|9|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:9:5[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
+[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
 [0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|8|:|9|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|8|:|8|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:8:5[0m
+help|:|crates/docling/src/converter.rs|:|9|:|10|:|1|:|1|:|remove the whole `use` item|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|9|:|9|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:9:5[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m8[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
+[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
 [0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|8|:|9|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|10|:|10|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:10:35[0m
+help|:|crates/docling/src/converter.rs|:|9|:|10|:|1|:|1|:|remove the whole `use` item|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|11|:|11|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:11:35[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
+[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
 [0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|10|:|10|:|33|:|39|:|remove the unused import|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|10|:|10|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:10:35[0m
+help|:|crates/docling/src/converter.rs|:|11|:|11|:|33|:|39|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|11|:|11|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:11:35[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
+[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
 [0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|10|:|10|:|33|:|39|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/converter.rs|:|11|:|11|:|33|:|39|:|remove the unused import|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -144,24 +144,6 @@ warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Pa
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
-warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
-
-|:|none
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
-warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::collections::HashSet;[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/processor.rs|:|6|:|7|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -195,6 +177,24 @@ help|:|crates/docling/src/processor.rs|:|9|:|9|:|15|:|29|:|remove the unused imp
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|33|:|39|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|14|:|15|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|39|:|40|:|remove the unused imports|:|none|:|
+warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
+
+|:|none
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::collections::HashSet;[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+|:|none
+help|:|crates/docling/src/processor.rs|:|6|:|7|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|9|:|9|:|15|:|20|:|unused imports: `debug`, `error`, and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `debug`, `error`, and `warn`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:9:15[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -356,58 +356,34 @@ warning|:|crates/docling/src/crawler.rs|:|466|:|466|:|17|:|27|:|variable `page_c
 [0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: consider using `_page_count` instead[0m
 
 |:|none
-warning|:|crates/docling/src/converter.rs|:|150|:|150|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:150:17[0m
+warning|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:17[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m150[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_output`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|150|:|150|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
-warning|:|crates/docling/src/converter.rs|:|150|:|150|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:150:17[0m
+help|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
+warning|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:17[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m150[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_output`[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|150|:|150|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
-warning|:|crates/docling/src/converter.rs|:|151|:|151|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:151:17[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m151[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
+[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_in_body`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|151|:|151|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
-warning|:|crates/docling/src/converter.rs|:|151|:|151|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:151:17[0m
+help|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
+warning|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:259:41[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m151[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_in_body`[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|151|:|151|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
-warning|:|crates/docling/src/converter.rs|:|204|:|204|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:204:41[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m204[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
+[0m[1m[38;5;12m259[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m                           [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_partial_tag`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|204|:|204|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
-warning|:|crates/docling/src/converter.rs|:|204|:|204|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:204:41[0m
+help|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
+warning|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:13[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m204[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                           [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_partial_tag`[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|204|:|204|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
-warning|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:150:13[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m150[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
@@ -415,11 +391,45 @@ warning|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|23|:|variable does 
 [0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:150:13[0m
+help|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|17|:|remove this `mut`|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:13[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m150[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
+
+|:|none
+help|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|17|:|remove this `mut`|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:17[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_output`[0m
+
+|:|none
+help|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
+warning|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:17[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_in_body`[0m
+
+|:|none
+help|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
+warning|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:259:41[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m259[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                           [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_partial_tag`[0m
+
+|:|none
+help|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
+warning|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:13[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
@@ -427,27 +437,17 @@ warning|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|23|:|variable does 
 [0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|150|:|150|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|151|:|151|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:151:13[0m
+help|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|17|:|remove this `mut`|:|none|:|
+warning|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:13[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m151[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
+[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^^[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|151|:|151|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|151|:|151|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:151:13[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m151[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|151|:|151|:|13|:|17|:|remove this `mut`|:|none|:|
+help|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|17|:|remove this `mut`|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|115|:|115|:|22|:|23|:|unused variable: `i`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `i`[0m
 [0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:115:22[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
@@ -738,14 +738,6 @@ warning|:|crates/docling/src/main.rs|:|10|:|10|:|5|:|19|:|unused import: `std::i
 
 |:|none
 help|:|crates/docling/src/main.rs|:|10|:|11|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|11|:|11|:|5|:|23|:|unused import: `std::path::PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::path::PathBuf`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:11:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::PathBuf;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|11|:|12|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/main.rs|:|11|:|11|:|5|:|23|:|unused import: `std::path::PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::path::PathBuf`[0m
 [0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:11:5[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
@@ -762,6 +754,14 @@ warning|:|crates/docling/src/main.rs|:|18|:|18|:|5|:|28|:|unused import: `tokio:
 
 |:|none
 help|:|crates/docling/src/main.rs|:|18|:|19|:|1|:|1|:|remove the whole `use` item|:|none|:|
+warning|:|crates/docling/src/main.rs|:|11|:|11|:|5|:|23|:|unused import: `std::path::PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::path::PathBuf`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:11:5[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::PathBuf;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^[0m
+
+|:|none
+help|:|crates/docling/src/main.rs|:|11|:|12|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/main.rs|:|19|:|19|:|35|:|39|:|unused imports: `Level` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Level` and `warn`[0m
 [0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:19:35[0m
 [0m   [0m[0m[1m[38;5;12m|[0m

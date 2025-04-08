@@ -170,3 +170,29 @@ This file tracks the implementation progress of the [DOCLING.md](./DOCLING.md) p
     - Content-Type verification ensures only actual images are saved
 
 - STATUS: success
+
+## v0.4 Changes
+
+*08.04.2025 05:52*
+
+[REF](./DOCLING.md#v04) - BUG: url entries not converting but waiting indefinitely - implement verbose logging to track conversion progress (CHANGE [] -> [x])
+
+- SUMMARY: 
+    - Enhanced converter component with detailed logging to diagnose hanging conversion issues
+
+- DESCRIPTION: 
+    - Implemented timeout settings for HTTP requests to prevent indefinite waiting
+    - Added comprehensive logging throughout the conversion process with detailed timing information
+    - Enhanced convert_directory method with file-by-file progress reporting
+    - Added timing and status information to convert_file method
+    - Implemented detailed step-by-step logging in the Jina Reader converter method
+    - Added specific error handling and diagnostics for different failure modes (timeout, connection, etc.)
+    - Improved logging for URL extraction and reconstruction in Jina Reader
+
+- REASONING: 
+    - Previous implementation didn't provide enough information to diagnose conversion issues
+    - Lack of timeouts allowed HTTP requests to hang indefinitely
+    - Users had no visibility into what stage of conversion was active or failing
+    - Detailed logging allows identification of exactly where conversions are stalling
+
+- STATUS: success

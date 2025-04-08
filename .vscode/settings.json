@@ -1,6 +1,6 @@
 {
     
-    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.colorTheme": "Adwaita Dark & Github syntax highlighting",
     "cargoRunner.nextest.enable": true,
     "codeglow.blockDetection": "delimiters",
     "codeglow.dimOpacity": 0.8,
