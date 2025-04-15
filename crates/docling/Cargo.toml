@@ -13,13 +13,14 @@ mi4ulings-config = { path = "../config" }
 regex = "1.10.2"
 reqwest = { version = "0.11", features = ["json"] }
 serde = { version = "1.0", features = ["derive"] }
-spider = "1.1"
+spider = "1.96"                                                             # Updated spider version if needed, check latest compatible
 tokio = { version = "1.34", features = ["full", "tracing"] }
 toml = "0.8"
 tracing = "0.1"
 tracing-appender = "0.2"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "time"] }
 url = "2.4"
+html-escape = "0.2"                                                         # Added for title decoding
 
 # HTML to Markdown converters
 htmd = { version = "0.1.6", optional = true }
@@ -27,7 +28,9 @@ fast_html2md = { version = "0.0.48", optional = true }
 
 [features]
 default = ["htmd"]
-html2md=["fast-html2md"]
+html2md = [
+    "fast-html2md",
+] # Kept for potential backward compatibility, but htmd is default
 htmd = ["dep:htmd"]
 fast-html2md = ["dep:fast_html2md"]
 full = ["htmd", "fast-html2md"]

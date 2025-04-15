@@ -18,3 +18,7 @@ other crates uses this lib, they need to define struct for settings. each settin
 
 # CONFIG
 -  cleanup_backups_after_days (default 30)
+
+# PLAN (Historical - See CONFIG_worklog.md for details)
+[x] create config implementation & implement program
+[-] create unit tests for planed program

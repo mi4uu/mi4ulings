@@ -82,58 +82,60 @@ help|:|crates/config/src/lib.rs|:|44|:|44|:|1|:|1|:|try adding this|:|none|:|imp
 }
 
 
-warning|:|crates/docling/src/crawler.rs|:|23|:|23|:|5|:|29|:|unused import: `spider::website::Website`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `spider::website::Website`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:23:5[0m
+error|:|crates/docling/src/crawler.rs|:|22|:|22|:|36|:|49|:|unresolved import `spider::configuration::RequestConfig`|:|[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `spider::configuration::RequestConfig`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:22:36[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m23[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse spider::website::Website;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[38;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    configuration::{Configuration, RequestConfig}, // Import RequestConfig[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9m^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mno `RequestConfig` in `configuration`[0m
+
+|:|none
+error|:|crates/docling/src/crawler.rs|:|22|:|22|:|36|:|49|:|unresolved import `spider::configuration::RequestConfig`|:|[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `spider::configuration::RequestConfig`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:22:36[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    configuration::{Configuration, RequestConfig}, // Import RequestConfig[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9m^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mno `RequestConfig` in `configuration`[0m
+
+|:|none
+warning|:|crates/docling/src/crawler.rs|:|14|:|14|:|23|:|30|:|unused import: `PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `PathBuf`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:14:23[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m14[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                       [0m[0m[1m[33m^^^^^^^[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
 [0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
 
 |:|none
-help|:|crates/docling/src/crawler.rs|:|23|:|24|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/crawler.rs|:|23|:|23|:|5|:|29|:|unused import: `spider::website::Website`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `spider::website::Website`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:23:5[0m
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|21|:|30|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/crawler.rs|:|14|:|14|:|23|:|30|:|unused import: `PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `PathBuf`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:14:23[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m23[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse spider::website::Website;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[38;5;12m14[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                       [0m[0m[1m[33m^^^^^^^[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
 [0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
 
 |:|none
-help|:|crates/docling/src/crawler.rs|:|23|:|24|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|9|:|9|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:9:5[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|9|:|10|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|9|:|9|:|5|:|17|:|unused import: `regex::Regex`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `regex::Regex`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:9:5[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse regex::Regex;[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|9|:|10|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|11|:|11|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:11:35[0m
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|21|:|30|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/crawler.rs|:|14|:|14|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/crawler.rs|:|27|:|27|:|30|:|39|:|unused import: `broadcast`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `broadcast`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:27:30[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tokio::sync::{Semaphore, broadcast, mpsc};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                              [0m[0m[1m[33m^^^^^^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|11|:|11|:|33|:|39|:|remove the unused import|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|11|:|11|:|35|:|39|:|unused import: `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:11:35[0m
+help|:|crates/docling/src/crawler.rs|:|27|:|27|:|28|:|39|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/crawler.rs|:|27|:|27|:|30|:|39|:|unused import: `broadcast`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `broadcast`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:27:30[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m
+[0m[1m[38;5;12m27[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tokio::sync::{Semaphore, broadcast, mpsc};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                              [0m[0m[1m[33m^^^^^^^^^[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|11|:|11|:|33|:|39|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/crawler.rs|:|27|:|27|:|28|:|39|:|remove the unused import|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -144,6 +146,24 @@ warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Pa
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
 help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
+
+|:|none
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
+help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
+warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::collections::HashSet;[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+|:|none
+help|:|crates/docling/src/processor.rs|:|6|:|7|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -177,24 +197,6 @@ help|:|crates/docling/src/processor.rs|:|9|:|9|:|15|:|29|:|remove the unused imp
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|33|:|39|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|14|:|15|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|39|:|40|:|remove the unused imports|:|none|:|
-warning|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|21|:|unused import: `Path`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `Path`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:5:17[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::{Path, PathBuf};[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^[0m
-
-|:|none
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|17|:|23|:|remove the unused import|:|none|:|
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|16|:|17|:|remove the unused import|:|none|:|
-help|:|crates/docling/src/processor.rs|:|5|:|5|:|30|:|31|:|remove the unused import|:|none|:|
-warning|:|crates/docling/src/processor.rs|:|6|:|6|:|5|:|30|:|unused import: `std::collections::HashSet`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::collections::HashSet`[0m
-[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:6:5[0m
-[0m  [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m6[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::collections::HashSet;[0m
-[0m  [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/processor.rs|:|6|:|7|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|9|:|9|:|15|:|20|:|unused imports: `debug`, `error`, and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `debug`, `error`, and `warn`[0m
 [0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:9:15[0m
 [0m  [0m[0m[1m[38;5;12m|[0m
@@ -220,21 +222,6 @@ help|:|crates/docling/src/processor.rs|:|9|:|9|:|15|:|29|:|remove the unused imp
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|33|:|39|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|14|:|15|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/processor.rs|:|9|:|9|:|39|:|40|:|remove the unused imports|:|none|:|
-warning|:|crates/docling/src/lib.rs|:|20|:|20|:|17|:|25|:|unused imports: `Duration` and `SystemTime`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Duration` and `SystemTime`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:20:17[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::time::{Duration, SystemTime};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^[0m[0m  [0m[0m[1m[33m^^^^^^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/lib.rs|:|20|:|20|:|27|:|37|:|unused imports: `Duration` and `SystemTime`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Duration` and `SystemTime`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:20:17[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::time::{Duration, SystemTime};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^[0m[0m  [0m[0m[1m[33m^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|20|:|21|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/lib.rs|:|20|:|20|:|17|:|25|:|unused imports: `Duration` and `SystemTime`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Duration` and `SystemTime`[0m
 [0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:20:17[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
@@ -266,6 +253,21 @@ warning|:|crates/docling/src/lib.rs|:|27|:|27|:|35|:|39|:|unused imports: `debug
 |:|none
 help|:|crates/docling/src/lib.rs|:|27|:|27|:|15|:|22|:|remove the unused imports|:|none|:|
 help|:|crates/docling/src/lib.rs|:|27|:|27|:|33|:|39|:|remove the unused imports|:|none|:|
+warning|:|crates/docling/src/lib.rs|:|20|:|20|:|17|:|25|:|unused imports: `Duration` and `SystemTime`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Duration` and `SystemTime`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:20:17[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::time::{Duration, SystemTime};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^[0m[0m  [0m[0m[1m[33m^^^^^^^^^^[0m
+
+|:|none
+warning|:|crates/docling/src/lib.rs|:|20|:|20|:|27|:|37|:|unused imports: `Duration` and `SystemTime`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Duration` and `SystemTime`[0m
+[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:20:17[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::time::{Duration, SystemTime};[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^[0m[0m  [0m[0m[1m[33m^^^^^^^^^^[0m
+
+|:|none
+help|:|crates/docling/src/lib.rs|:|20|:|21|:|1|:|1|:|remove the whole `use` item|:|none|:|
 warning|:|crates/docling/src/lib.rs|:|27|:|27|:|15|:|20|:|unused imports: `debug` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `debug` and `warn`[0m
 [0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:27:15[0m
 [0m   [0m[0m[1m[38;5;12m|[0m
@@ -322,132 +324,166 @@ warning|:|crates/docling/src/lib.rs|:|538|:|538|:|9|:|17|:|unused variable: `md_
 
 |:|none
 help|:|crates/docling/src/lib.rs|:|538|:|538|:|9|:|17|:|if this is intentional, prefix it with an underscore|:|none|:|_md_files
-warning|:|crates/docling/src/crawler.rs|:|407|:|407|:|13|:|24|:|unused variable: `spider_task`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `spider_task`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:407:13[0m
+error|:|crates/docling/src/crawler.rs|:|129|:|132|:|29|:|14|:|no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope|:|[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:132:14[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m407[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let spider_task = tokio::spawn(async move {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_spider_task`[0m
+[0m[1m[38;5;12m129[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m        let spider_config = Configuration::new()[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _____________________________-[0m
+[0m[1m[38;5;12m130[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_respect_robots_txt(self.config.respect_robots_txt)[0m
+[0m[1m[38;5;12m131[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_delay(self.config.delay_between_request_in_ms)[0m
+[0m[1m[38;5;12m132[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_request_config(Some(request_config))[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mmethod not found in `&mut Configuration`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____________|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
 
 |:|none
-help|:|crates/docling/src/crawler.rs|:|407|:|407|:|13|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_spider_task
-warning|:|crates/docling/src/crawler.rs|:|466|:|466|:|17|:|27|:|variable `page_count` is assigned to, but never used|:|[0m[1m[33mwarning[0m[0m[1m: variable `page_count` is assigned to, but never used[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:466:17[0m
+error|:|crates/docling/src/crawler.rs|:|132|:|132|:|14|:|33|:|no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope|:|[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:132:14[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m466[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut page_count = 0;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^^^[0m
+[0m[1m[38;5;12m129[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m        let spider_config = Configuration::new()[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _____________________________-[0m
+[0m[1m[38;5;12m130[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_respect_robots_txt(self.config.respect_robots_txt)[0m
+[0m[1m[38;5;12m131[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_delay(self.config.delay_between_request_in_ms)[0m
+[0m[1m[38;5;12m132[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_request_config(Some(request_config))[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mmethod not found in `&mut Configuration`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____________|[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: consider using `_page_count` instead[0m
 
 |:|none
-warning|:|crates/docling/src/crawler.rs|:|407|:|407|:|13|:|24|:|unused variable: `spider_task`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `spider_task`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:407:13[0m
+error|:|crates/docling/src/crawler.rs|:|129|:|132|:|29|:|14|:|no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope|:|[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:132:14[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m407[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let spider_task = tokio::spawn(async move {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_spider_task`[0m
+[0m[1m[38;5;12m129[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m        let spider_config = Configuration::new()[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _____________________________-[0m
+[0m[1m[38;5;12m130[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_respect_robots_txt(self.config.respect_robots_txt)[0m
+[0m[1m[38;5;12m131[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_delay(self.config.delay_between_request_in_ms)[0m
+[0m[1m[38;5;12m132[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_request_config(Some(request_config))[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mmethod not found in `&mut Configuration`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____________|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
 
 |:|none
-help|:|crates/docling/src/crawler.rs|:|407|:|407|:|13|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_spider_task
-warning|:|crates/docling/src/crawler.rs|:|466|:|466|:|17|:|27|:|variable `page_count` is assigned to, but never used|:|[0m[1m[33mwarning[0m[0m[1m: variable `page_count` is assigned to, but never used[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:466:17[0m
+error|:|crates/docling/src/crawler.rs|:|132|:|132|:|14|:|33|:|no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope|:|[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `with_request_config` found for mutable reference `&mut spider::configuration::Configuration` in the current scope[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:132:14[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m466[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut page_count = 0;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^^^^[0m
+[0m[1m[38;5;12m129[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m        let spider_config = Configuration::new()[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _____________________________-[0m
+[0m[1m[38;5;12m130[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_respect_robots_txt(self.config.respect_robots_txt)[0m
+[0m[1m[38;5;12m131[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_delay(self.config.delay_between_request_in_ms)[0m
+[0m[1m[38;5;12m132[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            .with_request_config(Some(request_config))[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mmethod not found in `&mut Configuration`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____________|[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: consider using `_page_count` instead[0m
 
 |:|none
-warning|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:17[0m
+error|:|crates/docling/src/crawler.rs|:|145|:|145|:|44|:|45|:|the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`|:|[0m[1m[38;5;9merror[E0277][0m[0m[1m: the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:145:44[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_output`[0m
+[0m[1m[38;5;12m99[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m    pub async fn process_entry(&mut self, entry: &mut UrlEntry) -> Result<()> {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _______________________________________________________________________________-[0m
+[0m[1m[38;5;12m100[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        // Update entry status[0m
+[0m[1m[38;5;12m101[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        entry.last_try = Some(Utc::now());[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m145[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut rx = website.subscribe(100)?; // Buffer size 100[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m                                            [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9muse `.ok_or(...)?` to provide an error compatible with `std::result::Result<(), anyhow::Error>`[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m280[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        Ok(())[0m
+[0m[1m[38;5;12m281[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    }[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____-[0m[0m [0m[0m[1m[38;5;12mthis function returns a `Result`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::option::Option<std::convert::Infallible>>` is not implemented for `std::result::Result<(), anyhow::Error>`[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::result::Result<std::convert::Infallible, E>>` [0m[0m[1m[35mis[0m[0m implemented for `[0m[0m[1m[35mstd::result::Result<T, F>[0m[0m`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
-warning|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:17[0m
+error|:|crates/docling/src/crawler.rs|:|99|:|281|:|79|:|6|:|the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`|:|[0m[1m[38;5;9merror[E0277][0m[0m[1m: the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:145:44[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_in_body`[0m
+[0m[1m[38;5;12m99[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m    pub async fn process_entry(&mut self, entry: &mut UrlEntry) -> Result<()> {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _______________________________________________________________________________-[0m
+[0m[1m[38;5;12m100[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        // Update entry status[0m
+[0m[1m[38;5;12m101[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        entry.last_try = Some(Utc::now());[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m145[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut rx = website.subscribe(100)?; // Buffer size 100[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m                                            [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9muse `.ok_or(...)?` to provide an error compatible with `std::result::Result<(), anyhow::Error>`[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m280[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        Ok(())[0m
+[0m[1m[38;5;12m281[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    }[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____-[0m[0m [0m[0m[1m[38;5;12mthis function returns a `Result`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::option::Option<std::convert::Infallible>>` is not implemented for `std::result::Result<(), anyhow::Error>`[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::result::Result<std::convert::Infallible, E>>` [0m[0m[1m[35mis[0m[0m implemented for `[0m[0m[1m[35mstd::result::Result<T, F>[0m[0m`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
-warning|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:259:41[0m
+error|:|crates/docling/src/crawler.rs|:|145|:|145|:|44|:|45|:|the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`|:|[0m[1m[38;5;9merror[E0277][0m[0m[1m: the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:145:44[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m259[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                           [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_partial_tag`[0m
+[0m[1m[38;5;12m99[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m    pub async fn process_entry(&mut self, entry: &mut UrlEntry) -> Result<()> {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _______________________________________________________________________________-[0m
+[0m[1m[38;5;12m100[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        // Update entry status[0m
+[0m[1m[38;5;12m101[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        entry.last_try = Some(Utc::now());[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m145[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut rx = website.subscribe(100)?; // Buffer size 100[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m                                            [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9muse `.ok_or(...)?` to provide an error compatible with `std::result::Result<(), anyhow::Error>`[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m280[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        Ok(())[0m
+[0m[1m[38;5;12m281[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    }[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____-[0m[0m [0m[0m[1m[38;5;12mthis function returns a `Result`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::option::Option<std::convert::Infallible>>` is not implemented for `std::result::Result<(), anyhow::Error>`[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::result::Result<std::convert::Infallible, E>>` [0m[0m[1m[35mis[0m[0m implemented for `[0m[0m[1m[35mstd::result::Result<T, F>[0m[0m`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
-warning|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:13[0m
+error|:|crates/docling/src/crawler.rs|:|99|:|281|:|79|:|6|:|the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`|:|[0m[1m[38;5;9merror[E0277][0m[0m[1m: the `?` operator can only be used on `Result`s, not `Option`s, in an async function that returns `Result`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:145:44[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
+[0m[1m[38;5;12m99[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m    pub async fn process_entry(&mut self, entry: &mut UrlEntry) -> Result<()> {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m _______________________________________________________________________________-[0m
+[0m[1m[38;5;12m100[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        // Update entry status[0m
+[0m[1m[38;5;12m101[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        entry.last_try = Some(Utc::now());[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m145[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut rx = website.subscribe(100)?; // Buffer size 100[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m                                            [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9muse `.ok_or(...)?` to provide an error compatible with `std::result::Result<(), anyhow::Error>`[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m280[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        Ok(())[0m
+[0m[1m[38;5;12m281[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    }[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_____-[0m[0m [0m[0m[1m[38;5;12mthis function returns a `Result`[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::option::Option<std::convert::Infallible>>` is not implemented for `std::result::Result<(), anyhow::Error>`[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `std::ops::FromResidual<std::result::Result<std::convert::Infallible, E>>` [0m[0m[1m[35mis[0m[0m implemented for `[0m[0m[1m[35mstd::result::Result<T, F>[0m[0m`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:13[0m
+error|:|crates/docling/src/converter.rs|:|227|:|227|:|54|:|66|:|failed to resolve: use of undeclared crate or module `fast_html2md`|:|[0m[1m[38;5;9merror[E0433][0m[0m[1m: failed to resolve: use of undeclared crate or module `fast_html2md`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:227:54[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
+[0m[1m[38;5;12m227[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            let result = std::panic::catch_unwind(|| fast_html2md::convert_html(html));[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                                      [0m[0m[1m[38;5;9m^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9muse of undeclared crate or module `fast_html2md`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|unused variable: `output`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `output`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:17[0m
+error|:|crates/docling/src/converter.rs|:|227|:|227|:|54|:|66|:|failed to resolve: use of undeclared crate or module `fast_html2md`|:|[0m[1m[38;5;9merror[E0433][0m[0m[1m: failed to resolve: use of undeclared crate or module `fast_html2md`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:227:54[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_output`[0m
+[0m[1m[38;5;12m227[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            let result = std::panic::catch_unwind(|| fast_html2md::convert_html(html));[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                                      [0m[0m[1m[38;5;9m^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9muse of undeclared crate or module `fast_html2md`[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|205|:|205|:|17|:|23|:|if this is intentional, prefix it with an underscore|:|none|:|_output
-warning|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|unused variable: `in_body`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `in_body`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:17[0m
+warning|:|crates/docling/src/converter.rs|:|296|:|296|:|17|:|23|:|value assigned to `output` is never read|:|[0m[1m[33mwarning[0m[0m[1m: value assigned to `output` is never read[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:296:17[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_in_body`[0m
+[0m[1m[38;5;12m296[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: maybe it is overwritten before being read?[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|206|:|206|:|17|:|24|:|if this is intentional, prefix it with an underscore|:|none|:|_in_body
-warning|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|unused variable: `partial_tag`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `partial_tag`[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:259:41[0m
+warning|:|crates/docling/src/converter.rs|:|296|:|296|:|17|:|23|:|value assigned to `output` is never read|:|[0m[1m[33mwarning[0m[0m[1m: value assigned to `output` is never read[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:296:17[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m259[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   let partial_tag = &result[link_start..];[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                           [0m[0m[1m[33m^^^^^^^^^^^[0m[0m [0m[0m[1m[33mhelp: if this is intentional, prefix it with an underscore: `_partial_tag`[0m
+[0m[1m[38;5;12m296[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[33m^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: maybe it is overwritten before being read?[0m
 
 |:|none
-help|:|crates/docling/src/converter.rs|:|259|:|259|:|41|:|52|:|if this is intentional, prefix it with an underscore|:|none|:|_partial_tag
-warning|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|23|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:205:13[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut output = String::new();[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_mut)]` on by default[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|205|:|205|:|13|:|17|:|remove this `mut`|:|none|:|
-warning|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|24|:|variable does not need to be mutable|:|[0m[1m[33mwarning[0m[0m[1m: variable does not need to be mutable[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/converter.rs:206:13[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m206[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        let mut in_body = false;[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m----[0m[0m[1m[33m^^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12mhelp: remove this `mut`[0m
-
-|:|none
-help|:|crates/docling/src/converter.rs|:|206|:|206|:|13|:|17|:|remove this `mut`|:|none|:|
 warning|:|crates/docling/src/processor.rs|:|115|:|115|:|22|:|23|:|unused variable: `i`|:|[0m[1m[33mwarning[0m[0m[1m: unused variable: `i`[0m
 [0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/processor.rs:115:22[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
@@ -480,323 +516,3 @@ warning|:|crates/docling/src/lib.rs|:|280|:|280|:|9|:|21|:|unused variable: `def
 
 |:|none
 help|:|crates/docling/src/lib.rs|:|280|:|280|:|9|:|21|:|if this is intentional, prefix it with an underscore|:|none|:|_default_deep
-warning|:|crates/docling/src/crawler.rs|:|48|:|48|:|8|:|19|:|field `respect_robots` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `respect_robots` is never read[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:58:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m48[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct AsyncSpider {[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;12m-----------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m58[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    respect_robots: bool,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|58|:|58|:|5|:|19|:|field `respect_robots` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `respect_robots` is never read[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:58:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m48[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct AsyncSpider {[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;12m-----------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m58[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    respect_robots: bool,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|327|:|327|:|12|:|19|:|field `visited` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `visited` is never read[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:333:5[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m327[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Crawler {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m            [0m[0m[1m[38;5;12m-------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    visited: HashSet<String>,[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|333|:|333|:|5|:|12|:|field `visited` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `visited` is never read[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:333:5[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m327[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Crawler {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m            [0m[0m[1m[38;5;12m-------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    visited: HashSet<String>,[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|48|:|48|:|8|:|19|:|field `respect_robots` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `respect_robots` is never read[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:58:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m48[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct AsyncSpider {[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;12m-----------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m58[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    respect_robots: bool,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|58|:|58|:|5|:|19|:|field `respect_robots` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `respect_robots` is never read[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:58:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m48[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct AsyncSpider {[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;12m-----------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m58[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    respect_robots: bool,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(dead_code)]` on by default[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|327|:|327|:|12|:|19|:|field `visited` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `visited` is never read[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:333:5[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m327[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Crawler {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m            [0m[0m[1m[38;5;12m-------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    visited: HashSet<String>,[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/crawler.rs|:|333|:|333|:|5|:|12|:|field `visited` is never read|:|[0m[1m[33mwarning[0m[0m[1m: field `visited` is never read[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/crawler.rs:333:5[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m327[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Crawler {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m            [0m[0m[1m[38;5;12m-------[0m[0m [0m[0m[1m[38;5;12mfield in this struct[0m
-[0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    visited: HashSet<String>,[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/lib.rs|:|50|:|54|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:50:1[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m50[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for TransformMethod {[0m
-[0m[1m[38;5;12m51[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m52[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        TransformMethod::Htmd[0m
-[0m[1m[38;5;12m53[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
-[0m[1m[38;5;12m54[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(clippy::derivable_impls)]` on by default[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute and mark the default variant[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m41[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m42[0m[0m [0m[0m[38;5;10m~ [0m[0mpub enum TransformMethod {[0m
-[0m[1m[38;5;12m43[0m[0m [0m[0m[1m[38;5;12m|[0m[0m     /// Use htmd library (default)[0m
-[0m[1m[38;5;12m44[0m[0m [0m[0m[38;5;10m~ [0m[0m    [0m[0m[38;5;10m#[default][0m
-[0m[1m[38;5;12m45[0m[0m [0m[0m[38;5;10m~     [0m[0mHtmd,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|50|:|55|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|
-help|:|crates/docling/src/lib.rs|:|41|:|41|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[derive(Default)]
-
-help|:|crates/docling/src/lib.rs|:|43|:|43|:|5|:|5|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[default]
-    
-warning|:|crates/docling/src/lib.rs|:|50|:|54|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:50:1[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m50[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for TransformMethod {[0m
-[0m[1m[38;5;12m51[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m52[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        TransformMethod::Htmd[0m
-[0m[1m[38;5;12m53[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
-[0m[1m[38;5;12m54[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(clippy::derivable_impls)]` on by default[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute and mark the default variant[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m41[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m42[0m[0m [0m[0m[38;5;10m~ [0m[0mpub enum TransformMethod {[0m
-[0m[1m[38;5;12m43[0m[0m [0m[0m[1m[38;5;12m|[0m[0m     /// Use htmd library (default)[0m
-[0m[1m[38;5;12m44[0m[0m [0m[0m[38;5;10m~ [0m[0m    [0m[0m[38;5;10m#[default][0m
-[0m[1m[38;5;12m45[0m[0m [0m[0m[38;5;10m~     [0m[0mHtmd,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|50|:|55|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|
-help|:|crates/docling/src/lib.rs|:|41|:|41|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[derive(Default)]
-
-help|:|crates/docling/src/lib.rs|:|43|:|43|:|5|:|5|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[default]
-    
-warning|:|crates/docling/src/lib.rs|:|68|:|72|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:68:1[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m68[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for CrawlStatus {[0m
-[0m[1m[38;5;12m69[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m70[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        CrawlStatus::Enabled[0m
-[0m[1m[38;5;12m71[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
-[0m[1m[38;5;12m72[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute and mark the default variant[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m59[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m60[0m[0m [0m[0m[38;5;10m~ [0m[0mpub enum CrawlStatus {[0m
-[0m[1m[38;5;12m61[0m[0m [0m[0m[1m[38;5;12m|[0m[0m     /// Task is enabled and ready to run[0m
-[0m[1m[38;5;12m62[0m[0m [0m[0m[38;5;10m~ [0m[0m    [0m[0m[38;5;10m#[default][0m
-[0m[1m[38;5;12m63[0m[0m [0m[0m[38;5;10m~     [0m[0mEnabled,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|68|:|73|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|
-help|:|crates/docling/src/lib.rs|:|59|:|59|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[derive(Default)]
-
-help|:|crates/docling/src/lib.rs|:|61|:|61|:|5|:|5|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[default]
-    
-warning|:|crates/docling/src/lib.rs|:|68|:|72|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:68:1[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m68[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for CrawlStatus {[0m
-[0m[1m[38;5;12m69[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m70[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        CrawlStatus::Enabled[0m
-[0m[1m[38;5;12m71[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    }[0m
-[0m[1m[38;5;12m72[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute and mark the default variant[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m59[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m60[0m[0m [0m[0m[38;5;10m~ [0m[0mpub enum CrawlStatus {[0m
-[0m[1m[38;5;12m61[0m[0m [0m[0m[1m[38;5;12m|[0m[0m     /// Task is enabled and ready to run[0m
-[0m[1m[38;5;12m62[0m[0m [0m[0m[38;5;10m~ [0m[0m    [0m[0m[38;5;10m#[default][0m
-[0m[1m[38;5;12m63[0m[0m [0m[0m[38;5;10m~     [0m[0mEnabled,[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|68|:|73|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|
-help|:|crates/docling/src/lib.rs|:|59|:|59|:|1|:|1|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[derive(Default)]
-
-help|:|crates/docling/src/lib.rs|:|61|:|61|:|5|:|5|:|replace the manual implementation with a derive attribute and mark the default variant|:|none|:|#[default]
-    
-warning|:|crates/docling/src/lib.rs|:|213|:|219|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:213:1[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m213[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for UrlEntries {[0m
-[0m[1m[38;5;12m214[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m215[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        Self {[0m
-[0m[1m[38;5;12m216[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            entries: HashMap::new(),[0m
-[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[33m|[0m
-[0m[1m[38;5;12m219[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m208[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m209[0m[0m [0m[0m[38;5;10m~ [0m[0mpub struct UrlEntries {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|213|:|220|:|1|:|1|:|replace the manual implementation with a derive attribute|:|none|:|
-help|:|crates/docling/src/lib.rs|:|208|:|208|:|1|:|1|:|replace the manual implementation with a derive attribute|:|none|:|#[derive(Default)]
-
-warning|:|crates/docling/src/lib.rs|:|213|:|219|:|1|:|2|:|this `impl` can be derived|:|[0m[1m[33mwarning[0m[0m[1m: this `impl` can be derived[0m
-[0m   [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/lib.rs:213:1[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m213[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m/[0m[0m [0m[0mimpl Default for UrlEntries {[0m
-[0m[1m[38;5;12m214[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m    fn default() -> Self {[0m
-[0m[1m[38;5;12m215[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m        Self {[0m
-[0m[1m[38;5;12m216[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m            entries: HashMap::new(),[0m
-[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[33m|[0m
-[0m[1m[38;5;12m219[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|[0m[0m [0m[0m}[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[33m|_^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#derivable_impls[0m
-[0m[1m[38;5;14mhelp[0m[0m: replace the manual implementation with a derive attribute[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m208[0m[0m [0m[0m[38;5;10m+ #[derive(Default)][0m
-[0m[1m[38;5;12m209[0m[0m [0m[0m[38;5;10m~ [0m[0mpub struct UrlEntries {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-
-|:|none
-help|:|crates/docling/src/lib.rs|:|213|:|220|:|1|:|1|:|replace the manual implementation with a derive attribute|:|none|:|
-help|:|crates/docling/src/lib.rs|:|208|:|208|:|1|:|1|:|replace the manual implementation with a derive attribute|:|none|:|#[derive(Default)]
-
-warning|:|crates/docling/src/main.rs|:|10|:|10|:|5|:|19|:|unused import: `std::io::Write`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::io::Write`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:10:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::io::Write;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|10|:|11|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|10|:|10|:|5|:|19|:|unused import: `std::io::Write`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::io::Write`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:10:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m10[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::io::Write;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(unused_imports)]` on by default[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|10|:|11|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|11|:|11|:|5|:|23|:|unused import: `std::path::PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::path::PathBuf`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:11:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::PathBuf;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|11|:|12|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|18|:|18|:|5|:|28|:|unused import: `tokio::runtime::Runtime`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `tokio::runtime::Runtime`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:18:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m18[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tokio::runtime::Runtime;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|18|:|19|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|11|:|11|:|5|:|23|:|unused import: `std::path::PathBuf`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `std::path::PathBuf`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:11:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m11[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse std::path::PathBuf;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|11|:|12|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|19|:|19|:|35|:|39|:|unused imports: `Level` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Level` and `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:19:35[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m19[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn, Level};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m[0m  [0m[0m[1m[33m^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/main.rs|:|19|:|19|:|41|:|46|:|unused imports: `Level` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Level` and `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:19:35[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m19[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn, Level};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m[0m  [0m[0m[1m[33m^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|19|:|19|:|33|:|46|:|remove the unused imports|:|none|:|
-warning|:|crates/docling/src/main.rs|:|18|:|18|:|5|:|28|:|unused import: `tokio::runtime::Runtime`|:|[0m[1m[33mwarning[0m[0m[1m: unused import: `tokio::runtime::Runtime`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:18:5[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m18[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tokio::runtime::Runtime;[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|18|:|19|:|1|:|1|:|remove the whole `use` item|:|none|:|
-warning|:|crates/docling/src/main.rs|:|19|:|19|:|35|:|39|:|unused imports: `Level` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Level` and `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:19:35[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m19[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn, Level};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m[0m  [0m[0m[1m[33m^^^^^[0m
-
-|:|none
-warning|:|crates/docling/src/main.rs|:|19|:|19|:|41|:|46|:|unused imports: `Level` and `warn`|:|[0m[1m[33mwarning[0m[0m[1m: unused imports: `Level` and `warn`[0m
-[0m  [0m[0m[1m[38;5;12m--> [0m[0mcrates/docling/src/main.rs:19:35[0m
-[0m   [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m19[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse tracing::{debug, error, info, warn, Level};[0m
-[0m   [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[33m^^^^[0m[0m  [0m[0m[1m[33m^^^^^[0m
-
-|:|none
-help|:|crates/docling/src/main.rs|:|19|:|19|:|33|:|46|:|remove the unused imports|:|none|:|

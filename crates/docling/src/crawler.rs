@@ -1,34 +1,35 @@
 //! Web crawler functionality for downloading web pages and extracting links
 //!
 //! This module provides functionality to:
-//! - Crawl websites to a specified depth
+//! - Crawl websites to a specified depth using the `spider` crate
 //! - Download and save HTML content
 //! - Extract and download media files (images)
-//! - Support configurable parameters like crawl depth, delay, and user agent
+//! - Support configurable parameters like crawl depth, delay, user agent, robots.txt respect
 //! - Handle URL normalization and conversion to filenames
-//! - Process URLs concurrently with tokio async/await
 //!
 //! The main entry point is the `Crawler` struct, which orchestrates the entire
 //! crawling process for a given URL entry.
 
-use std::collections::{HashSet, VecDeque};
 use std::fs::create_dir_all;
-use std::path::Path;
-use std::sync::{Arc, Mutex};
+use std::path::{Path, PathBuf};
+use std::sync::Arc;
 use std::time::Duration;
 
 use anyhow::{Context, Result};
 use chrono::Utc;
 use reqwest::Client;
-use spider::website::Website;
+use spider::{
+    configuration::{Configuration, RequestConfig}, // Import RequestConfig
+    website::Website,
+};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
-use tokio::sync::{broadcast, mpsc, Semaphore};
+use tokio::sync::{Semaphore, broadcast, mpsc};
 use tokio::time::sleep;
 use tracing::{debug, error, info, warn};
 use url::Url;
 
-use crate::{DoclingConfig, UrlEntry, CrawlStatus};
+use crate::{CrawlStatus, DoclingConfig, UrlEntry};
 
 /// Represents a web page with its URL and HTML content
 ///
@@ -41,296 +42,19 @@ struct Page {
     body: String,
 }
 
-/// Enhanced Spider implementation that leverages tokio for concurrent processing
-///
-/// This provides a more robust interface for crawling websites using tokio's
-/// concurrency primitives like broadcast channels and spawn.
-struct AsyncSpider {
-    /// Base URL for crawling
-    base_url: Url,
-    /// HTTP client for making requests
-    client: Client,
-    /// Delay between requests in milliseconds
-    delay: u64,
-    /// Maximum crawl depth
-    max_depth: usize,
-    /// Whether to respect robots.txt
-    respect_robots: bool,
-    /// Discovered links
-    links: Arc<Mutex<HashSet<String>>>,
-    /// Links to be processed
-    queue: Arc<Mutex<VecDeque<(String, usize)>>>,
-    /// Set of visited URLs
-    visited: Arc<Mutex<HashSet<String>>>,
-    /// Broadcast sender for pages
-    page_tx: broadcast::Sender<Page>,
-    /// Semaphore for limiting concurrent requests
-    semaphore: Arc<Semaphore>,
-}
-
-impl AsyncSpider {
-    /// Create a new AsyncSpider with the specified website configuration
-    ///
-    /// # Arguments
-    /// * `url` - The starting URL for crawling
-    /// * `config` - The configuration for crawling
-    ///
-    /// # Returns
-    /// A new AsyncSpider instance and broadcast receiver for pages
-    ///
-    /// # Errors
-    /// Returns an error if the URL is invalid
-    fn new(url: &str, config: &DoclingConfig) -> Result<(Self, broadcast::Receiver<Page>)> {
-        let base_url = Url::parse(url).context("Invalid URL format")?;
-        
-        // Create HTTP client with user agent and other settings
-        let client = Client::builder()
-            .user_agent(&config.user_agent)
-            .timeout(Duration::from_secs(30))
-            .build()
-            .context("Failed to create HTTP client")?;
-        
-        let links = Arc::new(Mutex::new(HashSet::new()));
-        let queue = Arc::new(Mutex::new(VecDeque::new()));
-        let visited = Arc::new(Mutex::new(HashSet::new()));
-        
-        // Initialize with the starting URL at depth 0
-        queue.lock().unwrap().push_back((url.to_string(), 0));
-        
-        // Create broadcast channel for pages
-        let (page_tx, page_rx) = broadcast::channel(100);
-        
-        // Create semaphore for limiting concurrent requests
-        let max_concurrent = config.max_concurrent_requests.max(1) as usize;
-        let semaphore = Arc::new(Semaphore::new(max_concurrent));
-        
-        Ok((
-            Self {
-                base_url,
-                client,
-                delay: config.delay_between_request_in_ms,
-                max_depth: config.default_deep as usize,
-                respect_robots: config.respect_robots_txt,
-                links,
-                queue,
-                visited,
-                page_tx,
-                semaphore,
-            },
-            page_rx
-        ))
-    }
-    
-    /// Start crawling asynchronously
-    ///
-    /// This launches multiple worker tasks that fetch pages concurrently,
-    /// respecting the maximum concurrent requests setting.
-    ///
-    /// # Returns
-    /// A future that resolves when crawling is complete
-    pub async fn crawl(&self) -> Result<()> {
-        // Create a channel for worker completion signals
-        let (done_tx, mut done_rx) = mpsc::channel(1);
-        
-        // Clone references for worker tasks
-        let queue = Arc::clone(&self.queue);
-        let visited = Arc::clone(&self.visited);
-        let links = Arc::clone(&self.links);
-        let semaphore = Arc::clone(&self.semaphore);
-        let page_tx = self.page_tx.clone();
-        let client = self.client.clone();
-        let base_url = self.base_url.clone();
-        let delay = self.delay;
-        let max_depth = self.max_depth;
-        
-        // Launch the crawler task
-        tokio::spawn(async move {
-            loop {
-                // Get the next URL from the queue
-                let next_item = {
-                    let mut queue = queue.lock().unwrap();
-                    queue.pop_front()
-                };
-                
-                match next_item {
-                    Some((url, depth)) => {
-                        // Skip if already visited
-                        {
-                            let visited_urls = visited.lock().unwrap();
-                            if visited_urls.contains(&url) {
-                                continue;
-                            }
-                        }
-                        
-                        // Acquire semaphore permit to limit concurrent requests
-                        let permit = semaphore.clone().acquire_owned().await.unwrap();
-                        
-                        // Clone references for the task
-                        let queue = Arc::clone(&queue);
-                        let visited = Arc::clone(&visited);
-                        let links = Arc::clone(&links);
-                        let page_tx = page_tx.clone();
-                        let client = client.clone();
-                        let base_url = base_url.clone();
-                        
-                        // Process URL in a new task
-                        tokio::spawn(async move {
-                            // Mark as visited
-                            {
-                                let mut visited_urls = visited.lock().unwrap();
-                                visited_urls.insert(url.clone());
-                            }
-                            
-                            // Fetch the URL
-                            match fetch_url(&client, &url).await {
-                                Ok((parsed_url, body)) => {
-                                    // Extract links if not at max depth
-                                    if depth < max_depth {
-                                        let new_links = extract_links(&body, &parsed_url);
-                                        
-                                        // Add new links to queue
-                                        {
-                                            let mut link_set = links.lock().unwrap();
-                                            let mut queue = queue.lock().unwrap();
-                                            let visited_urls = visited.lock().unwrap();
-                                            
-                                            for link in new_links {
-                                                // Skip if already visited or queued
-                                                if visited_urls.contains(&link) || link_set.contains(&link) {
-                                                    continue;
-                                                }
-                                                
-                                                // Check if link is in the same domain
-                                                match Url::parse(&link) {
-                                                    Ok(parsed_link) => {
-                                                        if parsed_link.host() == base_url.host() {
-                                                            link_set.insert(link.clone());
-                                                            queue.push_back((link, depth + 1));
-                                                        }
-                                                    },
-                                                    Err(_) => continue, // Skip invalid URLs
-                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    // Send the page to the channel
-                                    let page = Page { url: parsed_url, body };
-                                    let _ = page_tx.send(page);
-                                    
-                                    // Wait for rate limiting
-                                    sleep(Duration::from_millis(delay)).await;
-                                },
-                                Err(e) => {
-                                    warn!("Failed to fetch URL {}: {}", url, e);
-                                }
-                            }
-                            
-                            // Release the semaphore permit
-                            drop(permit);
-                        });
-                    },
-                    None => {
-                        // Queue is empty, check if all workers are done
-                        let active_count = Arc::strong_count(&semaphore) - 1; // Minus self
-                        let permits_available = semaphore.available_permits();
-                        
-                        if active_count == permits_available {
-                            // All workers are idle, crawling is done
-                            let _ = done_tx.send(()).await;
-                            break;
-                        }
-                        
-                        // Wait a bit and check again
-                        sleep(Duration::from_millis(100)).await;
-                    }
-                }
-            }
-        });
-        
-        // Wait for crawling to complete
-        let _ = done_rx.recv().await;
-        
-        Ok(())
-    }
-}
-
-/// Fetch a URL and return its content
-///
-/// # Arguments
-/// * `client` - The HTTP client to use
-/// * `url` - The URL to fetch
-///
-/// # Returns
-/// A tuple of (parsed URL, HTML content) if successful
-///
-/// # Errors
-/// Returns an error if the URL is invalid, the request fails, or the
-/// response cannot be read
-async fn fetch_url(client: &Client, url: &str) -> Result<(Url, String)> {
-    let parsed_url = Url::parse(url).context("Invalid URL")?;
-    let response = client.get(url).send().await
-        .context("Failed to fetch URL")?;
-    let body = response.text().await
-        .context("Failed to read response body")?;
-    Ok((parsed_url, body))
-}
-
-/// Extract links from HTML content
-///
-/// # Arguments
-/// * `html` - The HTML content to extract links from
-/// * `base_url` - The base URL for resolving relative links
-///
-/// # Returns
-/// A vector of absolute URLs found in the HTML
-fn extract_links(html: &str, base_url: &Url) -> Vec<String> {
-    let mut links = Vec::new();
-    
-    // Extract href attributes
-    for line in html.lines() {
-        if line.contains("href=\"") {
-            if let Some(start) = line.find("href=\"") {
-                if let Some(end) = line[start + 6..].find('"') {
-                    let href = &line[start + 6..start + 6 + end];
-                    
-                    // Skip fragment-only, javascript, and mailto links
-                    if href.starts_with('#') || 
-                       href.starts_with("javascript:") || 
-                       href.starts_with("mailto:") {
-                        continue;
-                    }
-                    
-                    // Resolve relative URLs
-                    match base_url.join(href) {
-                        Ok(full_url) => {
-                            links.push(full_url.to_string());
-                        },
-                        Err(_) => continue,
-                    }
-                }
-            }
-        }
-    }
-    
-    links
-}
-
-/// Crawler handles web crawling and content downloading
+/// Crawler handles web crawling and content downloading using the `spider` crate
 ///
 /// This is the main component that orchestrates the crawling process:
-/// 1. Configures and initializes a spider for a URL entry
-/// 2. Crawls the website to the specified depth
-/// 3. Downloads and saves HTML content
-/// 4. Extracts and downloads media files (images)
+/// 1. Configures and initializes a spider `Website` for a URL entry
+/// 2. Crawls the website to the specified depth, respecting robots.txt if configured
+/// 3. Downloads and saves HTML content for allowed pages
+/// 4. Extracts and downloads media files (images) from downloaded pages
 /// 5. Updates the URL entry with status information
 pub struct Crawler {
     /// Configuration for the crawler
     config: DoclingConfig,
-    /// HTTP client for making requests
+    /// HTTP client for making requests (used for image downloads)
     client: Client,
-    /// Set of visited URLs to avoid duplicates
-    visited: HashSet<String>,
 }
 
 impl Crawler {
@@ -345,26 +69,22 @@ impl Crawler {
     /// # Errors
     /// Returns an error if the HTTP client cannot be created
     pub fn new(config: DoclingConfig) -> Result<Self> {
-        // Create HTTP client with user agent and other settings
+        // Create HTTP client with user agent and other settings for image downloads
         let client = Client::builder()
             .user_agent(&config.user_agent)
-            .timeout(Duration::from_secs(30))
+            .timeout(Duration::from_secs(30)) // Timeout for image downloads
             .build()
-            .context("Failed to create HTTP client")?;
-        
-        Ok(Self {
-            config,
-            client,
-            visited: HashSet::new(),
-        })
+            .context("Failed to create HTTP client for media")?;
+
+        Ok(Self { config, client })
     }
-    
+
     /// Processes a URL entry, downloading content and finding links
     ///
     /// This is the main entry point for crawling a website. It:
     /// 1. Updates the entry's status
     /// 2. Creates necessary output directories
-    /// 3. Configures and starts the crawler
+    /// 3. Configures and starts the `spider` crate crawler
     /// 4. Downloads all pages and media files
     /// 5. Updates the entry with success/failure information
     ///
@@ -379,110 +99,184 @@ impl Crawler {
     pub async fn process_entry(&mut self, entry: &mut UrlEntry) -> Result<()> {
         // Update entry status
         entry.last_try = Some(Utc::now());
-        
+
         // Skip if disabled
         if entry.status == CrawlStatus::Disabled {
             info!("Skipping disabled entry: {}", entry.name);
             return Ok(());
         }
-        
+
         info!("Processing entry: {} ({})", entry.name, entry.url);
-        
+
         // Create output directories
         let base_output_dir = self.config.outputs_path.join(&entry.name);
         let html_output_dir = base_output_dir.join(&self.config.output_parts_html_suffix);
         let media_output_dir = base_output_dir.join(&self.config.output_parts_media_suffix);
-        
+
         create_dir_all(&html_output_dir).context("Failed to create HTML output directory")?;
         create_dir_all(&media_output_dir).context("Failed to create media output directory")?;
-        
+
         // Create error directory if it doesn't exist
         let error_dir = base_output_dir.join("ERRORS");
         create_dir_all(&error_dir).context("Failed to create error directory")?;
-        
-        // Create AsyncSpider and start crawling
-        let (spider, mut pages_rx) = AsyncSpider::new(&entry.url, &self.config)?;
-        
-        // Launch the spider in a separate task
-        let spider_task = tokio::spawn(async move {
-            spider.crawl().await
-        });
-        
-        // Create a channel for downloaded pages
-        let (dl_tx, mut dl_rx) = mpsc::channel::<(Url, String)>(100);
-        
-        // Process downloaded pages
+
+        // Configure the spider Website
+        let request_config = RequestConfig::new()
+            .with_user_agent(Some(&self.config.user_agent))
+            .with_timeout(Some(Duration::from_secs(30)))
+            .build();
+
+        let spider_config = Configuration::new()
+            .with_respect_robots_txt(self.config.respect_robots_txt)
+            .with_delay(self.config.delay_between_request_in_ms)
+            .with_request_config(Some(request_config))
+            .with_max_depth(entry.crawl_depth as usize)
+            .with_max_concurrent_requests(Some(self.config.max_concurrent_requests as usize))
+            .with_subdomains(false) // Only crawl the specified domain
+            .with_tld(false) // Only crawl the specified domain
+            .build();
+
+        let mut website = Website::new(&entry.url)
+            .with_config(spider_config)
+            .build()
+            .context("Failed to build Website crawler")?;
+
+        // Subscribe to receive pages
+        let mut rx = website.subscribe(100)?; // Buffer size 100
+
+        // Channel to send downloaded pages for image processing
+        let (page_proc_tx, mut page_proc_rx) = mpsc::channel::<Page>(100);
+
+        // Task to handle image downloading and saving HTML
         let html_dir = html_output_dir.clone();
         let media_dir = media_output_dir.clone();
         let client = self.client.clone();
         let config = self.config.clone();
-        let dl_task = tokio::spawn(async move {
-            // Create semaphore for limiting concurrent media downloads
+        let download_task = tokio::spawn(async move {
             let media_semaphore = Arc::new(Semaphore::new(config.max_concurrent_requests as usize));
-            let mut crawled_urls = HashSet::new();
-            
-            while let Some((url, body)) = dl_rx.recv().await {
-                let file_path = html_dir.join(format!("{}.html", url_to_filename(&url)));
-                
+            let mut crawled_urls = std::collections::HashSet::new();
+
+            while let Some(page) = page_proc_rx.recv().await {
+                let url_string = page.url.to_string();
+                let filename_base = url_to_filename(&page.url);
+                let file_path = html_dir.join(format!("{}.html", filename_base));
+
                 // Save HTML content
                 match File::create(&file_path).await {
                     Ok(mut file) => {
-                        if let Err(e) = file.write_all(body.as_bytes()).await {
-                            error!("Failed to write HTML content: {}", e);
+                        if let Err(e) = file.write_all(page.body.as_bytes()).await {
+                            error!("Failed to write HTML content for {}: {}", url_string, e);
                             continue;
                         }
-                        
-                        debug!("Downloaded: {}", url);
-                        crawled_urls.insert(url.to_string());
-                        
-                        // Extract and download images
-                        // Use a separate task to avoid blocking
-                        let url_clone = url.clone();
-                        let body_clone = body.clone();
+
+                        debug!("Saved HTML: {}", url_string);
+                        crawled_urls.insert(url_string.clone());
+
+                        // Extract and download images in a separate task
+                        let url_clone = page.url.clone();
+                        let body_clone = page.body.clone();
                         let media_dir_clone = media_dir.clone();
                         let client_clone = client.clone();
                         let semaphore_clone = Arc::clone(&media_semaphore);
                         let delay = config.delay_between_request_in_ms;
-                        
+
                         tokio::spawn(async move {
                             // Acquire semaphore permit
-                            let _permit = semaphore_clone.acquire().await.unwrap();
-                            
-                            if let Err(e) = download_images(&url_clone, &body_clone, &client_clone, &media_dir_clone, delay).await {
+                            let permit = match semaphore_clone.acquire().await {
+                                Ok(p) => p,
+                                Err(_) => {
+                                    error!("Failed to acquire semaphore permit for image download");
+                                    return;
+                                }
+                            };
+
+                            if let Err(e) = download_images(
+                                &url_clone,
+                                &body_clone,
+                                &client_clone,
+                                &media_dir_clone,
+                                delay,
+                            )
+                            .await
+                            {
                                 warn!("Failed to download images for {}: {}", url_clone, e);
                             }
+                            drop(permit); // Release permit
                         });
-                    },
+                    }
                     Err(e) => {
-                        error!("Failed to create HTML file: {}", e);
+                        error!("Failed to create HTML file for {}: {}", url_string, e);
                     }
                 }
             }
-            
+
             crawled_urls
         });
-        
-        // Receive pages from spider and send them to the download task
-        let mut page_count = 0;
-        while let Ok(page) = pages_rx.recv().await {
-            let _ = dl_tx.send((page.url, page.body)).await;
-            page_count += 1;
-        }
-        
-        // Wait for download task to complete
-        match dl_task.await {
-            Ok(crawled_urls) => {
-                info!("Processed {} URLs for entry: {}", crawled_urls.len(), entry.name);
-            },
-            Err(e) => {
-                error!("Download task failed: {}", e);
+
+        // Start crawling in a separate task
+        let crawl_handle = tokio::spawn(async move {
+            website.crawl().await;
+            website // Return website to get stats later if needed
+        });
+
+        // Process pages received from the crawler
+        while let Ok(page_data) = rx.recv().await {
+            if let Some(bytes) = page_data.get_bytes() {
+                match String::from_utf8(bytes.to_vec()) {
+                    Ok(body) => {
+                        let page = Page {
+                            url: Url::parse(page_data.get_url())
+                                .context("Invalid URL from spider")?,
+                            body,
+                        };
+                        if let Err(e) = page_proc_tx.send(page).await {
+                            error!("Failed to send page for processing: {}", e);
+                        }
+                    }
+                    Err(e) => {
+                        warn!(
+                            "Failed to decode page content for {}: {}",
+                            page_data.get_url(),
+                            e
+                        );
+                    }
+                }
+            } else {
+                warn!("Received page without content: {}", page_data.get_url());
             }
         }
-        
-        // Update entry status
-        entry.last_download = Some(Utc::now());
-        entry.version += 1;
-        
+
+        // Ensure the sender is dropped so the receiver task can finish
+        drop(page_proc_tx);
+
+        // Wait for crawling and processing to complete
+        let crawl_result = crawl_handle.await;
+        let download_result = download_task.await;
+
+        if let Err(e) = crawl_result {
+            error!("Crawler task failed for {}: {}", entry.name, e);
+            // Optionally update entry status to Failed here or rely on retry logic
+            return Err(anyhow::anyhow!("Crawler task failed: {}", e));
+        }
+
+        match download_result {
+            Ok(crawled_urls) => {
+                info!(
+                    "Successfully processed {} URLs for entry: {}",
+                    crawled_urls.len(),
+                    entry.name
+                );
+                entry.last_download = Some(Utc::now());
+                entry.version += 1;
+                entry.status = CrawlStatus::Enabled; // Mark as success if crawl/download finishes
+            }
+            Err(e) => {
+                error!("Download/Processing task failed for {}: {}", entry.name, e);
+                entry.status = CrawlStatus::Failed; // Mark as failed if download task panics
+                return Err(anyhow::anyhow!("Download/Processing task failed: {}", e));
+            }
+        }
+
         Ok(())
     }
 }
@@ -502,15 +296,15 @@ impl Crawler {
 /// # Errors
 /// Returns an error if images cannot be extracted or downloaded
 async fn download_images(
-    url: &Url, 
+    url: &Url,
     html: &str,
     client: &Client,
     media_dir: &Path,
-    delay: u64
+    delay: u64,
 ) -> Result<()> {
     // Extract image URLs from HTML
     let mut image_urls = Vec::new();
-    
+
     // Extract img src attributes (better parsing than before)
     for line in html.lines() {
         if line.contains("<img") && line.contains("src=") {
@@ -538,7 +332,7 @@ async fn download_images(
             }
         }
     }
-    
+
     // Download each image
     for image_url in image_urls {
         // Resolve relative URLs
@@ -549,72 +343,96 @@ async fn download_images(
                 match url.join(image_url) {
                     Ok(url) => url,
                     Err(e) => {
-                        warn!("Failed to parse image URL {}: {}", image_url, e);
+                        warn!(
+                            "Failed to parse/join image URL '{}' relative to '{}': {}",
+                            image_url, url, e
+                        );
                         continue;
                     }
                 }
             }
         };
-        
+
         // Download image file
-        let filename = url_to_filename(&full_url);
-        
+        let filename_base = url_to_filename(&full_url);
+
         // Determine file extension
-        let extension = full_url.path().split('.').last().unwrap_or("jpg");
-        let file_path = media_dir.join(format!("{}.{}", filename, extension));
-        
+        let extension = full_url
+            .path_segments()
+            .and_then(|segs| segs.last())
+            .and_then(|last_seg| last_seg.split('.').last())
+            .unwrap_or("jpg"); // Default to jpg if no extension found
+
+        let file_path = media_dir.join(format!("{}.{}", filename_base, extension));
+
         // Skip if already exists
         if file_path.exists() {
+            debug!("Skipping existing image: {}", full_url);
             continue;
         }
-        
+
+        // Wait before making the request
+        sleep(Duration::from_millis(delay)).await;
+
         // Download image
         match client.get(full_url.as_str()).send().await {
             Ok(response) => {
+                if !response.status().is_success() {
+                    warn!(
+                        "Failed to download image {} - Status: {}",
+                        full_url,
+                        response.status()
+                    );
+                    continue;
+                }
+
                 // Check if it's actually an image by content type
-                let content_type = response.headers()
+                let content_type = response
+                    .headers()
                     .get(reqwest::header::CONTENT_TYPE)
                     .and_then(|v| v.to_str().ok())
                     .unwrap_or("");
-                
+
                 // Skip if not an image
                 if !content_type.starts_with("image/") {
+                    debug!(
+                        "Skipping non-image content type '{}' for URL: {}",
+                        content_type, full_url
+                    );
                     continue;
                 }
-                
+
                 match response.bytes().await {
-                    Ok(bytes) => {
-                        match File::create(&file_path).await {
-                            Ok(mut file) => {
-                                if let Err(e) = file.write_all(&bytes).await {
-                                    warn!("Failed to write image file: {}", e);
-                                } else {
-                                    debug!("Downloaded image: {}", full_url);
-                                }
-                            },
-                            Err(e) => {
-                                warn!("Failed to create image file: {}", e);
+                    Ok(bytes) => match File::create(&file_path).await {
+                        Ok(mut file) => {
+                            if let Err(e) = file.write_all(&bytes).await {
+                                warn!("Failed to write image file {}: {}", file_path.display(), e);
+                            } else {
+                                debug!("Downloaded image: {}", full_url);
                             }
+                        }
+                        Err(e) => {
+                            warn!("Failed to create image file {}: {}", file_path.display(), e);
                         }
                     },
                     Err(e) => {
-                        warn!("Failed to read image response: {}", e);
+                        warn!(
+                            "Failed to read image response bytes for {}: {}",
+                            full_url, e
+                        );
                     }
                 }
-            },
+            }
             Err(e) => {
                 warn!("Failed to download image {}: {}", full_url, e);
             }
         }
-        
-        // Wait between requests
-        sleep(Duration::from_millis(delay)).await;
     }
-    
+
     Ok(())
 }
 
-/// Converts a URL to a valid filename
+/// Converts a URL to a valid filename, attempting to preserve structure.
 ///
 /// # Arguments
 /// * `url` - The URL to convert
@@ -622,19 +440,53 @@ async fn download_images(
 /// # Returns
 /// A string that can be used as a filename
 fn url_to_filename(url: &Url) -> String {
-    let host = url.host_str().unwrap_or("unknown");
-    let path = url.path().trim_matches('/');
-    
-    // Combine host and path, replace invalid characters
-    let mut filename = format!("{}_{}", host, path);
-    
-    // Replace invalid characters
-    filename = filename.replace(['/', '\\', ':', '*', '?', '"', '<', '>', '|', ' '], "_");
-    
-    // Limit length
-    if filename.len() > 100 {
-        filename = filename.chars().take(100).collect();
+    let host = url.host_str().unwrap_or("unknown_host");
+    // Get path segments, filter out empty ones, join with underscores
+    let path = url
+        .path_segments()
+        .map(|segments| {
+            segments
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<_>>()
+                .join("_")
+        })
+        .unwrap_or_else(|| "".to_string()); // Use empty string if no path
+
+    // Combine host and path
+    let mut filename = if path.is_empty() {
+        host.to_string()
+    } else {
+        format!("{}_{}", host, path)
+    };
+
+    // Replace definitely invalid characters for most filesystems
+    filename = filename.replace(['/', '\\', ':', '*', '?', '"', '<', '>', '|'], "_");
+
+    // Replace common web characters that might be problematic
+    filename = filename
+        .replace('&', "_and_")
+        .replace('=', "_eq_")
+        .replace('+', "_plus_");
+
+    // Handle potential trailing characters or excessive underscores
+    filename = filename.trim_matches('_').to_string();
+    while filename.contains("__") {
+        filename = filename.replace("__", "_");
     }
-    
-    filename
+
+    // Limit length (e.g., 200 chars) to avoid filesystem limits
+    let max_len = 200;
+    if filename.len() > max_len {
+        // Simple truncation, could be smarter (e.g., hash suffix)
+        filename = filename.chars().take(max_len).collect();
+        // Ensure it doesn't end with an underscore after truncation
+        filename = filename.trim_end_matches('_').to_string();
+    }
+
+    // Handle case where filename might become empty after cleaning (e.g., URL was just "/")
+    if filename.is_empty() {
+        "index".to_string()
+    } else {
+        filename
+    }
 }
